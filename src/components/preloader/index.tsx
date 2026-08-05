@@ -18,9 +18,10 @@ export default function Preloader({ onFinish }: PreloaderProps) {
 
   const handleCounterComplete = () => {
     setIsEnding(true);
+    // Allow printed newspaper column article wipe sequence to play out smoothly (~1.8s)
     setTimeout(() => {
       if (onFinish) onFinish();
-    }, 1150);
+    }, 1850);
   };
 
   return (
@@ -34,7 +35,7 @@ export default function Preloader({ onFinish }: PreloaderProps) {
         initial={{ opacity: 1 }}
         animate={{ opacity: isEnding ? 0 : 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.45, ease: "easeInOut" }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         {/* Printer Registration Marks Overlay */}
         <RegistrationMarks />
@@ -44,7 +45,7 @@ export default function Preloader({ onFinish }: PreloaderProps) {
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative z-10 flex items-center justify-between border-b border-[#1c1917]/30 pb-2 sm:pb-3 text-[10px] sm:text-xs font-mono font-bold tracking-widest text-[#1c1917]/70 uppercase"
+          className="relative z-10 flex items-center justify-between border-b border-[#1c1917]/30 pb-2 sm:pb-3 px-6 sm:px-10 md:px-14 text-[10px] sm:text-xs font-mono font-bold tracking-widest text-[#1c1917]/70 uppercase"
         >
           <div className="hidden sm:block">EST. 2026</div>
           <div className="text-center font-extrabold text-[#1c1917] mx-auto sm:mx-0">
@@ -90,7 +91,7 @@ export default function Preloader({ onFinish }: PreloaderProps) {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 items-center sm:items-end border-t border-[#1c1917]/30 pt-2 sm:pt-3 text-xs font-mono uppercase font-bold"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 items-center sm:items-end border-t border-[#1c1917]/30 pt-2 sm:pt-3 px-6 sm:px-10 md:px-14 text-xs font-mono uppercase font-bold"
           >
             {/* Left: APPROVED FOR PRINT & Signature (Signature hidden on mobile) */}
             <div className="hidden sm:flex flex-col items-start space-y-1">
@@ -124,7 +125,7 @@ export default function Preloader({ onFinish }: PreloaderProps) {
           </motion.div>
 
           {/* Bottom Dark Ribbon */}
-          <div className="w-full bg-[#181614] text-[#efe4cb] py-1.5 sm:py-2 text-center text-[10px] sm:text-xs font-mono font-bold tracking-wider sm:tracking-[0.25em] uppercase border-t border-[#1c1917]">
+          <div className="w-full bg-primary text-[#efe4cb] py-1.5 sm:py-2 text-center text-[10px] sm:text-xs font-mono font-bold tracking-wider sm:tracking-[0.25em] uppercase border-t border-[#1c1917]">
             A WEB PORTFOLIO BY ABHISHEK JAISWAR
           </div>
         </div>

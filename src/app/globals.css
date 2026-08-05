@@ -23,7 +23,8 @@
   --font-serif: var(--font-newsreader), "Georgia", "Times New Roman", serif;
   --font-display: var(--font-playfair), "Playfair Display", "Times New Roman", serif;
   --font-mono: var(--font-dm-mono), monospace;
-  --font-signature: var(--font-signature), cursive;
+  /* --font-signature: var(--font-signature), cursive; */
+  --font-cursive: var(--font-cursive)
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   /* Newspaper-style type scale */
