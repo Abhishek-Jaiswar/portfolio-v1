@@ -1,56 +1,30 @@
 "use client";
 
+const CrosshairMark = ({ className }: { className?: string }) => (
+  <div className={`absolute pointer-events-none flex items-center justify-center z-20 ${className}`}>
+    {/* Horizontal axis line */}
+    <div className="absolute w-6 sm:w-8 h-[1px] bg-[#1c1917]/80" />
+    {/* Vertical axis line */}
+    <div className="absolute h-6 sm:h-8 w-[1px] bg-[#1c1917]/80" />
+    {/* Circle target */}
+    <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border border-[#1c1917]/80 bg-[#efe4cb]" />
+    {/* Red center dot */}
+    <div className="w-1 h-1 rounded-full bg-[#b91c1c]" />
+  </div>
+);
+
 export default function RegistrationMarks() {
   return (
-    <div className="absolute inset-0 pointer-events-none z-0 p-2 sm:p-3 md:p-4 flex flex-col justify-between overflow-hidden opacity-60 sm:opacity-75">
-      {/* Top Registration Crosshairs */}
-      <div className="flex justify-between items-center">
-        {/* Top Left */}
-        <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
-          <div className="absolute w-4 sm:w-5 h-[1px] bg-[#1c1917]/50" />
-          <div className="absolute h-4 sm:h-5 w-[1px] bg-[#1c1917]/50" />
-          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full border border-[#1c1917]/50" />
-        </div>
+    <>
+      {/* 4 Corner Registration Marks centered directly on border intersections */}
+      <CrosshairMark className="top-0 left-0 -translate-x-1/2 -translate-y-1/2" />
+      <CrosshairMark className="top-0 right-0 translate-x-1/2 -translate-y-1/2" />
+      <CrosshairMark className="bottom-0 left-0 -translate-x-1/2 translate-y-1/2" />
+      <CrosshairMark className="bottom-0 right-0 translate-x-1/2 translate-y-1/2" />
 
-        {/* Top Right */}
-        <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
-          <div className="absolute w-4 sm:w-5 h-[1px] bg-[#1c1917]/50" />
-          <div className="absolute h-4 sm:h-5 w-[1px] bg-[#1c1917]/50" />
-          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full border border-[#1c1917]/50" />
-        </div>
-      </div>
-
-      {/* Middle Edge Reticles */}
-      <div className="hidden sm:flex justify-between items-center my-auto">
-        <div className="flex flex-col items-center space-y-1">
-          <div className="w-3 h-[1px] bg-[#1c1917]/40" />
-          <div className="w-2 h-2 rounded-full border border-[#b91c1c] bg-[#b91c1c]/20" />
-          <div className="w-3 h-[1px] bg-[#1c1917]/40" />
-        </div>
-
-        <div className="flex flex-col items-center space-y-1">
-          <div className="w-3 h-[1px] bg-[#1c1917]/40" />
-          <div className="w-2 h-2 rounded-full border border-[#b91c1c] bg-[#b91c1c]/20" />
-          <div className="w-3 h-[1px] bg-[#1c1917]/40" />
-        </div>
-      </div>
-
-      {/* Bottom Registration Crosshairs */}
-      <div className="flex justify-between items-center">
-        {/* Bottom Left */}
-        <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
-          <div className="absolute w-4 sm:w-5 h-[1px] bg-[#1c1917]/50" />
-          <div className="absolute h-4 sm:h-5 w-[1px] bg-[#1c1917]/50" />
-          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full border border-[#1c1917]/50" />
-        </div>
-
-        {/* Bottom Right */}
-        <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
-          <div className="absolute w-4 sm:w-5 h-[1px] bg-[#1c1917]/50" />
-          <div className="absolute h-4 sm:h-5 w-[1px] bg-[#1c1917]/50" />
-          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full border border-[#1c1917]/50" />
-        </div>
-      </div>
-    </div>
+      {/* 2 Side Edge Registration Marks centered on vertical border lines */}
+      <CrosshairMark className="hidden sm:flex top-1/2 left-0 -translate-x-1/2 -translate-y-1/2" />
+      <CrosshairMark className="hidden sm:flex top-1/2 right-0 translate-x-1/2 -translate-y-1/2" />
+    </>
   );
 }

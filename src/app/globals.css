@@ -128,7 +128,7 @@ hr {
   }
 
   .headline-xl {
-    @apply text-4xl md:text-5xl;
+    @apply text-4xl md:text-5xl lg:text-6xl;
   }
 
   .headline-lg {
@@ -139,8 +139,76 @@ hr {
     @apply border-t border-rule my-6;
   }
 
+  .rule-double {
+    @apply border-t-4 border-b border-rule my-6 py-0.5;
+  }
+
   .section-title {
-    @apply font-serif text-sm font-bold uppercase tracking-widest 
-           border-b-2 border-ink pb-2 mb-6;
+    @apply font-serif text-xs md:text-sm font-bold uppercase tracking-widest 
+           border-b-2 border-ink pb-2 mb-6 text-accent;
+  }
+
+  /* Newspaper Drop-Cap Styling */
+  .drop-cap::first-letter {
+    float: left;
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    line-height: 0.85;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+    font-weight: 900;
+    color: #b91c1c;
+  }
+
+  /* Article Byline & Deck */
+  .article-deck {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: #44403c;
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .article-byline {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #b91c1c;
+    border-top: 1px solid rgba(28, 25, 23, 0.2);
+    border-bottom: 1px solid rgba(28, 25, 23, 0.2);
+    padding: 4px 0;
+    margin: 8px 0 16px 0;
+  }
+
+  /* Newspaper Column Flow */
+  .newspaper-columns {
+    column-count: 1;
+    column-gap: 2rem;
+    column-rule: 1px solid rgba(28, 25, 23, 0.2);
+  }
+
+  @media (min-width: 768px) {
+    .newspaper-columns {
+      column-count: 2;
+    }
+  }
+
+  /* Keyframe Ticker Marquee */
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: marquee 30s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
   }
 }
