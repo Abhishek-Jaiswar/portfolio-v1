@@ -24,15 +24,5 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@11.15.0",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "11.15.0",
-      "onFail": "ignore"
-    }
-  },
-  "onlyBuiltDependencies": [
-    "unrs-resolver"
-  ]
+  "packageManager": "pnpm@11.15.0"
 }
