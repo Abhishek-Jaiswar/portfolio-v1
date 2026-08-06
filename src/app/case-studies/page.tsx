@@ -6,6 +6,8 @@ import NewspaperHeader from "@/components/newspaper/newspaper-header";
 import NewspaperArticle from "@/components/newspaper/newspaper-article";
 import InvestigativeCaseCard from "@/components/newspaper/investigative-case-card";
 import EditorialModal, { ArticleData } from "@/components/newspaper/editorial-modal";
+import { useLanguage } from "@/context/language-context";
+import { useLocalizedContent } from "@/hooks/use-localized-content";
 
 const caseStudiesList: ArticleData[] = [
   {
@@ -72,25 +74,21 @@ const caseStudiesList: ArticleData[] = [
 
 export default function CaseStudiesPage() {
   const [selectedArticle, setSelectedArticle] = useState<ArticleData | null>(null);
+  const { t } = useLanguage();
+  const { featureCaseFiles } = useLocalizedContent();
 
   return (
     <div className="min-h-screen p-3 sm:p-6 md:p-8 bg-[#efe4cb] text-[#1c1917] font-serif selection:bg-[#b91c1c] selection:text-white relative overflow-x-hidden">
       {/* Full Newspaper Header & Navbar */}
-        <NewspaperHeader
-          tickerItems={[
-            "INVESTIGATIVE REPORT: SignBooks reduces compliance turnaround by 45%",
-            "AI DISPATCH: Low-latency streaming in Lume Chat",
-            "DESIGN REPORT: RS Interior Studio achieves 95+ lighthouse score",
-          ]}
-        />
+        <NewspaperHeader />
 
         {/* Specific Case Studies Section Banner */}
         <div className="text-center border-y-4 border-[#1c1917] py-6 bg-[#efe4cb] my-4 space-y-1">
           <span className="font-mono text-xs font-bold text-[#b91c1c] uppercase tracking-widest block">
-            ★ SPECIAL INVESTIGATIVE REPORTS & DOSSIERS ★
+            ★ {t("home.caseFilesHeading")} ★
           </span>
           <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight">
-            Investigative Case Files
+            {t("nav.caseStudies")}
           </h1>
           <p className="font-mono text-xs text-[#1c1917]/70 font-bold uppercase tracking-widest">
             PRODUCTION SAAS ARCHITECTURES &bull; MULTI-TENANCY &bull; REAL-TIME AI ENGINES
@@ -99,7 +97,7 @@ export default function CaseStudiesPage() {
 
         {/* Articles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-6 border-b-2 border-[#1c1917]">
-          {caseStudiesList.map((article, index) => (
+          {featureCaseFiles.map((article, index) => (
             <InvestigativeCaseCard
               key={article.id}
               article={article}
@@ -113,10 +111,10 @@ export default function CaseStudiesPage() {
         <footer className="pt-6 font-mono text-xs">
           <div className="flex items-center justify-between border-b border-[#1c1917]/30 pb-4">
             <Link href="/" className="text-[#b91c1c] font-bold hover:underline">
-              ← PAGE ONE [FRONT PAGE]
+              ← {t("nav.front")}
             </Link>
             <Link href="/editorials" className="text-[#b91c1c] font-bold hover:underline">
-              NEXT SECTION: EDITORIALS & OP-EDS →
+              {t("nav.editorials")} →
             </Link>
           </div>
           <div className="py-4 text-center text-[10px] text-[#1c1917]/60 uppercase tracking-widest">

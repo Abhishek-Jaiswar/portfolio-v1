@@ -5,28 +5,24 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import NewspaperHeader from "@/components/newspaper/newspaper-header";
 import HeritageSkyline from "@/components/preloader/heritage-skyline";
+import { useLanguage } from "@/context/language-context";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen p-3 sm:p-6 md:p-8 bg-[#efe4cb] text-[#1c1917] font-serif selection:bg-[#b91c1c] selection:text-white relative overflow-x-hidden">
       {/* Full Newspaper Header & Navbar */}
-        <NewspaperHeader
-          tickerItems={[
-            "PRESS WIRE: Open for Full-Time Software Engineering & AI Roles",
-            "LOCATION: Mumbai, Maharashtra, India",
-            "TELEGRAPH DESK: Direct inbox monitoring active",
-          ]}
-        />
+        <NewspaperHeader />
 
         {/* Specific Contact Section Banner */}
         <div className="text-center border-y-4 border-[#1c1917] py-6 bg-[#efe4cb] my-4 space-y-1">
           <span className="font-mono text-xs font-bold text-[#b91c1c] uppercase tracking-widest block">
-            ★ DIRECT DISPATCH & PRESS DESK ★
+            ★ {t("home.telegraphDeskTitle")} ★
           </span>
           <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight">
-            Press Room & Contact
+            {t("nav.contact")}
           </h1>
           <p className="font-mono text-xs text-[#1c1917]/70 font-bold uppercase tracking-widest">
             TELEGRAPH FORM &bull; HIRING INQUIRIES &bull; MUMBAI HEADQUARTERS

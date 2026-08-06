@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Newsreader, Playfair_Display, DM_Mono, Dancing_Script } from "next/font/google";
 import "./globals.css";
 import PreloaderProvider from "@/provider/preloader-provider";
+import { LanguageProvider } from "@/context/language-context";
+import { ThemeProvider } from "@/context/theme-context";
 
 const newsreaderFont = Newsreader({
   variable: "--font-newsreader",
@@ -171,6 +173,7 @@ const jsonLdSchema = {
   ],
 };
 
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -185,7 +188,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-full flex flex-col font-serif bg-background text-foreground">
-        <PreloaderProvider>{children}</PreloaderProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            <PreloaderProvider>{children}</PreloaderProvider>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

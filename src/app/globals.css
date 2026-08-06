@@ -68,14 +68,170 @@
 }
 
 /* ============================================
+   Theme Editions Palette Definitions
+   ============================================ */
+
+:root,
+[data-theme="classic"] {
+  --bg-paper: #efe4cb;
+  --bg-paper-dark: #e4d4b2;
+  --text-ink: #1c1917;
+  --text-ink-muted: rgba(28, 25, 23, 0.7);
+  --text-accent: #b91c1c;
+  --text-accent-hover: #991b1b;
+  --border-rule: #1c1917;
+  --border-rule-muted: rgba(28, 25, 23, 0.3);
+}
+
+[data-theme="modern-dark"] {
+  --bg-paper: #0b0f19;
+  --bg-paper-dark: #111827;
+  --text-ink: #f8fafc;
+  --text-ink-muted: rgba(248, 250, 252, 0.7);
+  --text-accent: #38bdf8;
+  --text-accent-hover: #0284c7;
+  --border-rule: #334155;
+  --border-rule-muted: rgba(51, 65, 85, 0.5);
+  color-scheme: dark;
+}
+
+[data-theme="modern-light"] {
+  --bg-paper: #ffffff;
+  --bg-paper-dark: #f0f0f0;
+  --text-ink: #000000;
+  --text-ink-muted: rgba(0, 0, 0, 0.7);
+  --text-accent: #000000;
+  --text-accent-hover: #333333;
+  --border-rule: #000000;
+  --border-rule-muted: rgba(0, 0, 0, 0.3);
+  color-scheme: light;
+}
+
+/* ============================================
+   Dynamic Theme Selector Class Overrides
+   ============================================ */
+
+[data-theme="modern-dark"],
+[data-theme="modern-light"] {
+  body {
+    background-color: var(--bg-paper) !important;
+    color: var(--text-ink) !important;
+  }
+
+  /* Background overrides */
+  .bg-\[\#efe4cb\],
+  .bg-\[\#efe4cb\]\/30,
+  .bg-\[\#efe4cb\]\/40,
+  .bg-\[\#efe4cb\]\/60,
+  .bg-\[\#efe4cb\]\/90 {
+    background-color: var(--bg-paper) !important;
+  }
+
+  .bg-\[\#e4d4b2\],
+  .bg-\[\#e4d4b2\]\/30,
+  .bg-\[\#e4d4b2\]\/40,
+  .bg-\[\#e4d4b2\]\/60 {
+    background-color: var(--bg-paper-dark) !important;
+  }
+
+  .bg-\[\#b91c1c\] {
+    background-color: var(--text-accent) !important;
+  }
+
+  .bg-\[\#1c1917\] {
+    background-color: var(--text-ink) !important;
+  }
+
+  /* Text overrides */
+  .text-\[\#1c1917\],
+  .text-\[\#1c1917\]\/90,
+  .text-\[\#1c1917\]\/85,
+  .text-\[\#1c1917\]\/80,
+  .text-\[\#1c1917\]\/70,
+  .text-\[\#1c1917\]\/60 {
+    color: var(--text-ink) !important;
+  }
+
+  .text-\[\#b91c1c\] {
+    color: var(--text-accent) !important;
+  }
+
+  /* Border overrides */
+  .border-\[\#1c1917\],
+  .border-\[\#1c1917\]\/20,
+  .border-\[\#1c1917\]\/30,
+  .border-\[\#1c1917\]\/40 {
+    border-color: var(--border-rule) !important;
+  }
+
+  .border-\[\#b91c1c\] {
+    border-color: var(--text-accent) !important;
+  }
+
+  .divide-\[\#1c1917\]\/40 > :not([hidden]) ~ :not([hidden]),
+  .divide-\[\#1c1917\]\/30 > :not([hidden]) ~ :not([hidden]),
+  .divide-\[\#1c1917\]\/20 > :not([hidden]) ~ :not([hidden]) {
+    border-color: var(--border-rule) !important;
+  }
+
+  /* Dynamic hover state overrides */
+  .hover\:bg-\[\#b91c1c\]:hover {
+    background-color: var(--text-accent) !important;
+    color: var(--bg-paper) !important;
+  }
+
+  .hover\:bg-\[\#991b1b\]:hover {
+    background-color: var(--text-accent-hover) !important;
+    color: var(--bg-paper) !important;
+  }
+
+  .hover\:bg-\[\#1c1917\]:hover {
+    background-color: var(--text-ink) !important;
+    color: var(--bg-paper) !important;
+  }
+
+  .hover\:text-\[\#b91c1c\]:hover,
+  .hover\:text-\[\#991b1b\]:hover,
+  .group:hover .group-hover\:text-\[\#b91c1c\] {
+    color: var(--text-accent) !important;
+  }
+
+  .hover\:text-\[\#1c1917\]:hover,
+  .group:hover .group-hover\:text-\[\#1c1917\] {
+    color: var(--text-ink) !important;
+  }
+
+  .hover\:border-\[\#b91c1c\]:hover,
+  .group:hover .group-hover\:border-\[\#b91c1c\] {
+    border-color: var(--text-accent) !important;
+  }
+
+  .hover\:border-\[\#1c1917\]:hover,
+  .group:hover .group-hover\:border-\[\#1c1917\] {
+    border-color: var(--border-rule) !important;
+  }
+}
+
+/* Force pure monochrome grayscale for Vintage Black & White theme */
+[data-theme="modern-light"] img {
+  filter: grayscale(100%) contrast(120%) !important;
+}
+
+[data-theme="modern-light"] .bg-\[\#b91c1c\] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* ============================================
    Base styles for newspaper feel
    ============================================ */
 
 html {
   font-family: var(--font-serif);
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: var(--bg-paper);
+  color: var(--text-ink);
   line-height: 1.5;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 body {

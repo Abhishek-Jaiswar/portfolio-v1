@@ -6,6 +6,8 @@ import { motion } from "motion/react";
 import NewspaperHeader from "@/components/newspaper/newspaper-header";
 import NewspaperArticle from "@/components/newspaper/newspaper-article";
 import EditorialModal, { ArticleData } from "@/components/newspaper/editorial-modal";
+import { useLanguage } from "@/context/language-context";
+import { useLocalizedContent } from "@/hooks/use-localized-content";
 
 const editorialsList: ArticleData[] = [
   {
@@ -63,25 +65,21 @@ const editorialsList: ArticleData[] = [
 
 export default function EditorialsPage() {
   const [selectedArticle, setSelectedArticle] = useState<ArticleData | null>(null);
+  const { t } = useLanguage();
+  const { editorials } = useLocalizedContent();
 
   return (
     <div className="min-h-screen p-3 sm:p-6 md:p-8 bg-[#efe4cb] text-[#1c1917] font-serif selection:bg-[#b91c1c] selection:text-white relative overflow-x-hidden">
       {/* Full Newspaper Header & Navbar */}
-        <NewspaperHeader
-          tickerItems={[
-            "OPINION: Building human-augmented AI systems",
-            "ESSAY: Pragmatic engineering principles for endurance",
-            "SYSTEMS: Schema isolation in multi-tenant SaaS",
-          ]}
-        />
+        <NewspaperHeader />
 
         {/* Specific Editorials Section Banner */}
         <div className="text-center border-y-4 border-[#1c1917] py-6 bg-[#efe4cb] my-4 space-y-1">
           <span className="font-mono text-xs font-bold text-[#b91c1c] uppercase tracking-widest block">
-            ★ TECHNICAL PHILOSOPHY & OPINION COLUMNS ★
+            ★ {t("home.editorialsHeading")} ★
           </span>
           <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight">
-            The Editorial Page
+            {t("nav.editorials")}
           </h1>
           <p className="font-mono text-xs text-[#1c1917]/70 font-bold uppercase tracking-widest">
             AI AUGMENTATION &bull; PRAGMATIC ARCHITECTURE &bull; SOFTWARE ESSAYS
@@ -90,7 +88,7 @@ export default function EditorialsPage() {
 
         {/* Editorial Articles List */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-6 border-b-2 border-[#1c1917]">
-          {editorialsList.map((article) => (
+          {editorials.map((article) => (
             <NewspaperArticle
               key={article.id}
               article={article}
@@ -104,10 +102,10 @@ export default function EditorialsPage() {
         <footer className="pt-6 font-mono text-xs">
           <div className="flex items-center justify-between border-b border-[#1c1917]/30 pb-4">
             <Link href="/case-studies" className="text-[#b91c1c] font-bold hover:underline">
-              ← PREVIOUS SECTION: CASE FILES
+              ← {t("nav.caseStudies")}
             </Link>
             <Link href="/experience" className="text-[#b91c1c] font-bold hover:underline">
-              NEXT SECTION: BUSINESS CHRONICLE →
+              {t("nav.experience")} →
             </Link>
           </div>
           <div className="py-4 text-center text-[10px] text-[#1c1917]/60 uppercase tracking-widest">

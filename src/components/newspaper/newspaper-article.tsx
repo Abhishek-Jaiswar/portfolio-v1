@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { ArticleData } from "./editorial-modal";
+import { useLanguage } from "@/context/language-context";
 
 interface ArticleProps {
   article: ArticleData;
@@ -16,6 +17,7 @@ export default function NewspaperArticle({
   onReadMore,
   featured = false,
 }: ArticleProps) {
+  const { t } = useLanguage();
   const detailHref = article.category.includes("OP-ED") || article.category.includes("ESSAY")
     ? `/editorials/${article.id}`
     : `/case-studies/${article.id}`;
@@ -57,7 +59,7 @@ export default function NewspaperArticle({
 
         {/* Byline */}
         <div className="text-[10px] font-mono font-bold text-[#b91c1c] uppercase border-y border-[#1c1917]/20 py-1 mb-3">
-          BY {article.author} &bull; {article.location}
+          {t("modal.by")} {article.author} &bull; {article.location}
         </div>
 
         {/* Image if present */}
@@ -81,12 +83,12 @@ export default function NewspaperArticle({
 
       {/* Footer CTA */}
       <div className="pt-3 border-t border-[#1c1917]/20 flex items-center justify-between font-mono text-xs">
-        <span className="text-[10px] text-[#1c1917]/60">{article.readTime} READ</span>
+        <span className="text-[10px] text-[#1c1917]/60">{article.readTime}</span>
         <Link
           href={detailHref}
           className="font-bold text-[#b91c1c] group-hover:underline flex items-center space-x-1 uppercase text-[11px] cursor-pointer"
         >
-          <span>FULL STORY</span>
+          <span>{t("home.readFullDispatch")}</span>
           <span className="group-hover:translate-x-1 transition-transform">→</span>
         </Link>
       </div>

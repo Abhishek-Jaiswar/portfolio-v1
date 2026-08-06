@@ -35,7 +35,7 @@ export default function EditorialDetailPage({ params }: EditorialDetailPageProps
       />
 
       {/* Main Full-Page Article Broadside Container */}
-      <article className="max-w-5xl mx-auto py-6 space-y-6">
+      <article className="w-full max-w-7xl mx-auto pt-1 pb-6 space-y-3.5">
         
         {/* Article Breadcrumb & Category Badge */}
         <div className="flex flex-wrap items-center justify-between border-b-2 border-[#1c1917] pb-2 text-xs font-mono font-bold uppercase text-[#b91c1c]">
@@ -186,7 +186,7 @@ export default function EditorialDetailPage({ params }: EditorialDetailPageProps
       </article>
 
       {/* Footer */}
-      <footer className="max-w-5xl mx-auto border-t-2 border-[#1c1917] pt-6 font-mono text-xs flex flex-wrap items-center justify-between">
+      <footer className="w-full max-w-7xl mx-auto border-t-2 border-[#1c1917] pt-6 font-mono text-xs flex flex-wrap items-center justify-between">
         <Link href="/editorials" className="text-[#b91c1c] font-bold hover:underline">
           ← BACK TO EDITORIALS
         </Link>

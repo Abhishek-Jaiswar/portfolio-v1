@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
+import { useLanguage } from "@/context/language-context";
 
 export interface ArticleData {
   id: string;
@@ -16,6 +17,7 @@ export interface ArticleData {
   image?: string;
   imageCaption?: string;
   paragraphs: string[];
+  pointers?: string[];
   pullQuote?: string;
   techStack?: string[];
   link?: {
@@ -30,6 +32,7 @@ interface EditorialModalProps {
 }
 
 export default function EditorialModal({ article, onClose }: EditorialModalProps) {
+  const { t } = useLanguage();
   if (!article) return null;
 
   return (
@@ -57,13 +60,13 @@ export default function EditorialModal({ article, onClose }: EditorialModalProps
             <div className="flex items-center space-x-3 text-[#b91c1c]">
               <span>[ {article.category} ]</span>
               <span>•</span>
-              <span className="text-[#1c1917]/70">{article.readTime} READ</span>
+              <span className="text-[#1c1917]/70">{article.readTime}</span>
             </div>
             <button
               onClick={onClose}
               className="border border-[#1c1917] bg-[#1c1917] text-[#efe4cb] px-3 py-1 text-xs font-mono font-bold hover:bg-[#b91c1c] transition-colors cursor-pointer"
             >
-              CLOSE [ESC] ✕
+              {t("modal.close")} [ESC] ✕
             </button>
           </div>
 
@@ -82,7 +85,7 @@ export default function EditorialModal({ article, onClose }: EditorialModalProps
           {/* Byline */}
           <div className="article-byline flex flex-wrap items-center justify-between text-xs font-mono py-2 border-y border-[#1c1917]/30 my-4 text-[#b91c1c]">
             <div>
-              BY <span className="font-black">{article.author}</span> — {article.role}
+              {t("modal.by")} <span className="font-black">{article.author}</span> — {article.role}
             </div>
             <div className="text-[#1c1917]/60">
               {article.location} &bull; {article.date}
