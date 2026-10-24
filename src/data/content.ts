@@ -5,7 +5,7 @@ export const site = {
   role: "Software Engineer",
   location: "Mumbai, India",
   timezone: "IST · UTC+5:30",
-  email: "abhishekndxw@gmail.com",
+  email: "txcorp@tridex.in",
   github: "https://github.com/Abhishek-Jaiswar",
   linkedin: "https://www.linkedin.com/in/abhishek-jaiswar12/",
   resume: "/resume.pdf",

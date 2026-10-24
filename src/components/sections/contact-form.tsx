@@ -9,7 +9,20 @@ export default function ContactForm() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const data = new FormData(event.currentTarget);
+    const name = String(data.get("name") ?? "");
+    const email = String(data.get("email") ?? "");
+    const subject = String(data.get("subject") ?? "");
+    const message = String(data.get("message") ?? "");
+
+    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+    const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
+      `[Portfolio] ${subject}`
+    )}&body=${encodeURIComponent(body)}`;
+
     setSubmitted(true);
+    window.location.href = mailto;
   }
 
   if (submitted) {
@@ -23,11 +36,11 @@ export default function ContactForm() {
           ✓
         </div>
         <h2 className="mt-5 font-serif text-2xl tracking-tight text-foreground">
-          Message sent
+          Finish in your email app
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          Thanks for reaching out — I&apos;ll get back to you shortly. You can also
-          email me directly at{" "}
+          Your email app should open with the message ready to send. If it
+          didn&apos;t, email me directly at{" "}
           <a href={`mailto:${site.email}`} className="text-accent">
             {site.email}
           </a>

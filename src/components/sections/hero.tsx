@@ -52,16 +52,6 @@ export default function Hero() {
           "-=0.35"
         )
         .from(
-          ".hero-cta",
-          {
-            opacity: 0,
-            y: 14,
-            stagger: 0.08,
-            duration: 0.55,
-          },
-          "-=0.35"
-        )
-        .from(
           ".hero-visual",
           {
             opacity: 0,
@@ -144,7 +134,7 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
               href="/case-studies"
-              className="hero-cta inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-[opacity,transform] duration-200 hover:-translate-y-0.5 hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-[opacity,transform] duration-200 hover:-translate-y-0.5 hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
             >
               View my work
               <span aria-hidden="true">↗</span>
@@ -154,7 +144,7 @@ export default function Hero() {
               href={site.resume}
               target="_blank"
               rel="noreferrer"
-              className="hero-cta inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-line bg-surface px-6 py-3 text-sm font-medium text-foreground transition-colors duration-200 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-line bg-surface px-6 py-3 text-sm font-medium text-foreground transition-colors duration-200 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
             >
               Download CV
               <span aria-hidden="true" className="text-faint">
@@ -163,7 +153,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <p className="hero-cta mt-7 inline-flex items-center gap-2 text-sm text-muted">
+          <p className="mt-7 inline-flex items-center gap-2 text-sm text-muted">
             <span
               aria-hidden="true"
               className="relative flex h-2 w-2 shrink-0"
@@ -187,15 +177,21 @@ export default function Hero() {
                 priority
                 className="object-cover"
               />
-              <div className="hero-seo absolute inset-x-0 bottom-0 border-t border-white/15 bg-black/80 px-5 py-5 backdrop-blur-md sm:px-6 sm:py-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/70">
+              <div className="hero-seo absolute inset-x-0 bottom-0 border-t border-white/15 bg-black/80 px-4 py-4 backdrop-blur-md sm:px-6 sm:py-6">
+                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/70 sm:text-[10px]">
                   Full-stack developer · Mumbai
                 </p>
-                <p className="mt-2 max-w-[46ch] text-sm leading-relaxed text-white">
-                  I&apos;m Abhishek Jaiswar, a full-stack developer based in
-                  Mumbai. I build scalable web applications with React, Next.js,
-                  Node.js, PostgreSQL, and MongoDB — from secure APIs and data
-                  modeling to production-ready interfaces.
+                <p className="mt-1.5 max-w-[46ch] text-xs leading-relaxed text-white sm:mt-2 sm:text-sm">
+                  <span className="sm:hidden">
+                    I build scalable web applications with React, Next.js,
+                    Node.js, PostgreSQL, and MongoDB.
+                  </span>
+                  <span className="hidden sm:inline">
+                    I&apos;m Abhishek Jaiswar, a full-stack developer based in
+                    Mumbai. I build scalable web applications with React, Next.js,
+                    Node.js, PostgreSQL, and MongoDB — from secure APIs and data
+                    modeling to production-ready interfaces.
+                  </span>
                 </p>
               </div>
             </div>
