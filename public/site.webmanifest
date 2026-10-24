@@ -1,6 +1,9 @@
 {
-  "name": "The Abhishek Times — Abhishek Jaiswar Portfolio",
-  "short_name": "Abhishek Times",
+  "name": "Abhishek Jaiswar — Software Engineer",
+  "short_name": "Abhishek Jaiswar",
+  "description": "Portfolio of Abhishek Jaiswar — software engineer based in Mumbai, India.",
+  "start_url": "/",
+  "display": "standalone",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +16,6 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#efe4cb",
-  "background_color": "#efe4cb",
-  "display": "standalone"
+  "theme_color": "#f7f6f3",
+  "background_color": "#f7f6f3"
 }

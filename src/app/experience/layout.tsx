@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Business Chronicle & Official Career Appointments",
+  title: "Experience & Skills",
   description:
-    "Career history, appointments, and engineering pedigree of Abhishek Jaiswar, Full Stack Developer & Tech Lead based in Mumbai, India.",
+    "Career history, roles, and technical skills of Abhishek Jaiswar, a software engineer based in Mumbai, India.",
   openGraph: {
-    title: "Business Chronicle — Abhishek Jaiswar Career Record",
+    title: "Experience & Skills · Abhishek Jaiswar",
     description:
-      "Full-stack engineering history, lead roles, and technical achievements at CBS Software Solutions and KartBuddy Logistics.",
+      "Software engineering history, roles, and the tools I build with.",
   },
+  alternates: { canonical: "/experience" },
 };
 
 export default function ExperienceLayout({

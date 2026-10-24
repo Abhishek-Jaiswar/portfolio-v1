@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const baseUrl = "https://abhishekjaiswar.dev";
+const baseUrl = "https://tridex.in";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -10,5 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       disallow: ["/api/", "/_next/"],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
   };
 }

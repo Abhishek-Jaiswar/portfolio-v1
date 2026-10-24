@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Investigative Case Files & Tech Reports",
+  title: "Work — Case Studies",
   description:
-    "In-depth software engineering case studies, multi-tenant SaaS architectures, and production reports by Abhishek Jaiswar including SignBooks, Lume Chat, and RS Interior Studio.",
+    "Production web applications and case studies by Abhishek Jaiswar — full-stack projects covering APIs, data modeling, and responsive frontends.",
   openGraph: {
-    title: "Investigative Case Files — Abhishek Jaiswar Portfolio",
+    title: "Work — Case Studies · Abhishek Jaiswar",
     description:
-      "Production case files on multi-tenant SaaS architectures, real-time AI streaming engines, and web performance.",
+      "Full-stack web applications and product work built in production.",
   },
+  alternates: { canonical: "/case-studies" },
 };
 
 export default function CaseStudiesLayout({

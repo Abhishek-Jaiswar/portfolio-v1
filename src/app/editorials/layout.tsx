@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "The Editorial Page & Technical Essays",
+  title: "Writing — Essays & Notes",
   description:
-    "Technical essays, opinion pieces, and software philosophy by Abhishek Jaiswar on AI augmentation, pragmatic architecture, and shipping production SaaS.",
+    "Essays and technical notes by Abhishek Jaiswar on agentic systems, caching, developer tooling, and designing resilient software.",
   openGraph: {
-    title: "The Editorial Page — Abhishek Jaiswar",
+    title: "Writing — Essays & Notes · Abhishek Jaiswar",
     description:
-      "Essays on pragmatic software architecture, AI human synergy, and building durable engineering systems.",
+      "Essays on agentic AI, systems design, and the craft of shipping production software.",
   },
+  alternates: { canonical: "/editorials" },
 };
 
 export default function EditorialsLayout({

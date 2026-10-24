@@ -1,13 +1,19 @@
 import { MetadataRoute } from "next";
-import { ALL_ARTICLES } from "@/data/articles";
+import { allArticles } from "@/data/articles";
 
-const baseUrl = "https://abhishekjaiswar.dev";
+const baseUrl = "https://tridex.in";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
-  // Static routes
-  const routes = ["", "/case-studies", "/editorials", "/experience", "/contact"].map(
+  const routes = [
+    "",
+    "/case-studies",
+    "/how-i-build",
+    "/editorials",
+    "/experience",
+    "/contact",
+  ].map(
     (route) => ({
       url: `${baseUrl}${route}`,
       lastModified,
@@ -16,18 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
-  // Dynamic article routes
-  const articleRoutes = ALL_ARTICLES.map((article) => {
-    const isOpEd = article.category.includes("OP-ED") || article.category.includes("ESSAY");
-    const prefix = isOpEd ? "/editorials" : "/case-studies";
-
-    return {
-      url: `${baseUrl}${prefix}/${article.id}`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    };
-  });
+  const articleRoutes = allArticles.map((article) => ({
+    url: `${baseUrl}/${article.type === "work" ? "case-studies" : "editorials"}/${article.id}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
 
   return [...routes, ...articleRoutes];
 }

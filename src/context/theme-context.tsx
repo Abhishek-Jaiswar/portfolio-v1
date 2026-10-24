@@ -1,46 +1,72 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useCallback, useSyncExternalStore } from "react";
 
-export type ThemeMode = "classic" | "modern-dark" | "modern-light";
+export type Theme = "light" | "dark";
 
 interface ThemeContextType {
-  theme: ThemeMode;
-  setTheme: (theme: ThemeMode) => void;
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+  toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const STORAGE_KEY = "portfolio_theme_mode";
+const STORAGE_KEY = "portfolio-theme";
+const listeners = new Set<() => void>();
 
-function applyThemeToDOM(themeName: ThemeMode) {
-  if (typeof window !== "undefined") {
-    document.documentElement.setAttribute("data-theme", themeName);
-    document.body.setAttribute("data-theme", themeName);
-  }
+function emit() {
+  listeners.forEach((listener) => listener());
+}
+
+function getSnapshot(): Theme {
+  if (typeof window === "undefined") return "light";
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored === "light" || stored === "dark") return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function getServerSnapshot(): Theme {
+  return "light";
+}
+
+function subscribe(callback: () => void) {
+  listeners.add(callback);
+  const mql = window.matchMedia("(prefers-color-scheme: dark)");
+  const onSystemChange = () => {
+    if (!localStorage.getItem(STORAGE_KEY)) {
+      applyTheme(getSnapshot());
+      callback();
+    }
+  };
+  mql.addEventListener("change", onSystemChange);
+  return () => {
+    listeners.delete(callback);
+    mql.removeEventListener("change", onSystemChange);
+  };
+}
+
+function applyTheme(theme: Theme) {
+  if (typeof document === "undefined") return;
+  document.documentElement.classList.toggle("dark", theme === "dark");
+  document.documentElement.setAttribute("data-theme", theme);
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeMode>("classic");
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY) as ThemeMode | null;
-    if (saved && (saved === "classic" || saved === "modern-dark" || saved === "modern-light")) {
-      setThemeState(saved);
-      applyThemeToDOM(saved);
-    } else {
-      applyThemeToDOM("classic");
-    }
+  const setTheme = useCallback((next: Theme) => {
+    localStorage.setItem(STORAGE_KEY, next);
+    applyTheme(next);
+    emit();
   }, []);
 
-  const setTheme = (newTheme: ThemeMode) => {
-    setThemeState(newTheme);
-    localStorage.setItem(STORAGE_KEY, newTheme);
-    applyThemeToDOM(newTheme);
-  };
+  const toggleTheme = useCallback(() => {
+    setTheme(getSnapshot() === "dark" ? "light" : "dark");
+  }, [setTheme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

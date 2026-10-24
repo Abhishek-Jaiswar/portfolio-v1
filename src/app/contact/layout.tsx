@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Press Room & Official Telegraph Desk",
+  title: "Contact",
   description:
-    "Direct contact telegraph form, hiring inquiries, and official press channels for Abhishek Jaiswar, Full Stack Engineer in Mumbai, India.",
+    "Get in touch with Abhishek Jaiswar for full-time roles, contract work, or technical consultation. Based in Mumbai, India.",
   openGraph: {
-    title: "Press Room & Telegraph — Abhishek Jaiswar",
+    title: "Contact · Abhishek Jaiswar",
     description:
-      "Contact Abhishek Jaiswar for full-stack engineering opportunities, technical consultations, and product collaborations.",
+      "Reach out for engineering roles, projects, and collaborations.",
   },
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactLayout({

@@ -1,38 +1,44 @@
 import type { Metadata, Viewport } from "next";
-import { Newsreader, Playfair_Display, DM_Mono, Dancing_Script } from "next/font/google";
+import { Inter, Newsreader, DM_Mono, Great_Vibes } from "next/font/google";
 import "./globals.css";
-import PreloaderProvider from "@/provider/preloader-provider";
-import { LanguageProvider } from "@/context/language-context";
 import { ThemeProvider } from "@/context/theme-context";
+import Header from "@/components/site/header";
+import Footer from "@/components/site/footer";
 
-const newsreaderFont = Newsreader({
-  variable: "--font-newsreader",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  style: ["normal", "italic"],
-});
-
-const playfairFont = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-});
-
-const dmMonoFont = DM_Mono({
-  weight: ["400", "500"],
-  variable: "--font-dm-mono",
-  subsets: ["latin"],
-});
-
-const dancingScript = Dancing_Script({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-cursive",
   display: "swap",
 });
 
-const baseUrl = "https://abhishekjaiswar.dev";
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const dmMono = DM_Mono({
+  weight: ["400", "500"],
+  variable: "--font-dm-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const greatVibes = Great_Vibes({
+  weight: "400",
+  variable: "--font-greatvibes",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const baseUrl = "https://tridex.in";
 
 export const viewport: Viewport = {
-  themeColor: "#efe4cb",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f6f3" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0b" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
@@ -40,89 +46,62 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Abhishek Jaiswar — Full Stack Developer & AI Systems Engineer",
-    template: "%s | The Abhishek Times",
+    default: "Abhishek Jaiswar — Software Engineer",
+    template: "%s | Abhishek Jaiswar",
   },
   description:
-    "Portfolio and technical broadside of Abhishek Jaiswar, a Mumbai-based Full Stack Developer & AI Integration Engineer specializing in high-scale SaaS architectures, Node.js, Next.js, and multi-tenant PostgreSQL systems.",
+    "Abhishek Jaiswar is a software engineer based in Mumbai, building scalable web applications with React, Next.js, Node.js, Express, PostgreSQL, and MongoDB.",
   keywords: [
     "Abhishek Jaiswar",
-    "Full Stack Developer Mumbai",
+    "Software Engineer",
+    "Software Engineer Mumbai",
     "Software Engineer India",
+    "Full Stack Developer",
+    "Full Stack Developer Mumbai",
+    "React Developer",
+    "Next.js Developer",
     "Node.js Developer",
-    "Next.js Portfolio",
-    "TypeScript Architect",
-    "Multi-tenant SaaS",
-    "AI Streaming Systems",
-    "SignBooks",
-    "Lume Chat",
-    "RS Interior Studio",
+    "Express.js",
+    "PostgreSQL",
+    "MongoDB",
+    "REST API Development",
+    "TypeScript",
+    "Web Developer Mumbai",
+    "Portfolio",
   ],
   authors: [{ name: "Abhishek Jaiswar", url: baseUrl }],
   creator: "Abhishek Jaiswar",
-  publisher: "The Abhishek Times",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-
-  // Favicons & Icons
+  formatDetection: { email: false, address: false, telephone: false },
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   manifest: "/site.webmanifest",
-
-  // Open Graph / Facebook
   openGraph: {
     type: "website",
     locale: "en_US",
     url: baseUrl,
-    siteName: "The Abhishek Times",
-    title: "Abhishek Jaiswar — Full Stack Developer & AI Systems Engineer",
+    siteName: "Abhishek Jaiswar",
+    title: "Abhishek Jaiswar — Software Engineer",
     description:
-      "Explore production SaaS case studies, low-latency AI streaming engines, and technical editorials by Abhishek Jaiswar in Mumbai, India.",
-    images: [
-      {
-        url: "/abhishek.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Abhishek Jaiswar — Full Stack & AI Engineer",
-      },
-    ],
+      "Software engineer in Mumbai building scalable web applications with React, Next.js, Node.js, and PostgreSQL.",
   },
-
-  // Twitter Cards
   twitter: {
     card: "summary_large_image",
-    title: "Abhishek Jaiswar — Full Stack Developer & AI Systems Engineer",
+    title: "Abhishek Jaiswar — Software Engineer",
     description:
-      "Explore production SaaS case studies, low-latency AI streaming engines, and technical editorials by Abhishek Jaiswar.",
-    creator: "@abhishekjaiswar",
-    images: ["/abhishek.jpg"],
+      "Software engineer in Mumbai building scalable web applications end to end.",
   },
-
-  // Technical Search Engine Indexing
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
 };
 
-// JSON-LD Structured Data Schema for Person & WebSite
 const jsonLdSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -130,11 +109,9 @@ const jsonLdSchema = {
       "@type": "Person",
       "@id": `${baseUrl}/#person`,
       name: "Abhishek Jaiswar",
-      jobTitle: "Full Stack Developer & AI Integration Engineer",
-      worksFor: {
-        "@type": "Organization",
-        name: "CBS Software Solutions",
-      },
+      jobTitle: "Software Engineer",
+      worksFor: { "@type": "Organization", name: "CBS Software Private Limited" },
+      alumniOf: { "@type": "CollegeOrUniversity", name: "University of Mumbai" },
       address: {
         "@type": "PostalAddress",
         addressLocality: "Mumbai",
@@ -145,53 +122,72 @@ const jsonLdSchema = {
       image: `${baseUrl}/abhishek.jpg`,
       sameAs: [
         "https://github.com/Abhishek-Jaiswar",
-        "https://linkedin.com/in/abhishek-jaiswar",
+        "https://www.linkedin.com/in/abhishek-jaiswar12/",
       ],
       knowsAbout: [
         "Full Stack Development",
-        "Node.js",
+        "React.js",
         "Next.js",
+        "Node.js",
+        "Express.js",
         "TypeScript",
+        "JavaScript",
         "PostgreSQL",
-        "Multi-Tenant SaaS Architecture",
-        "AI Workflow Automation",
-        "Docker",
+        "MongoDB",
+        "REST API Development",
+        "Role-Based Access Control",
+        "Database Design",
+        "Performance Optimization",
+        "CI/CD",
+        "Clean Architecture",
+        "C++",
       ],
     },
     {
       "@type": "WebSite",
       "@id": `${baseUrl}/#website`,
       url: baseUrl,
-      name: "The Abhishek Times — Abhishek Jaiswar Portfolio",
+      name: "Abhishek Jaiswar — Portfolio",
       description:
-        "Digital newspaper broadside chronicling software architecture, ideas, and production case studies by Abhishek Jaiswar.",
-      publisher: {
-        "@id": `${baseUrl}/#person`,
-      },
+        "Portfolio of Abhishek Jaiswar, a software engineer based in Mumbai.",
+      publisher: { "@id": `${baseUrl}/#person` },
       inLanguage: "en-US",
     },
   ],
 };
 
+const themeInitScript = `
+(function() {
+  try {
+    var stored = localStorage.getItem('portfolio-theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var isDark = stored ? stored === 'dark' : prefersDark;
+    if (isDark) document.documentElement.classList.add('dark');
+  } catch (e) {}
+})();
+`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${newsreaderFont.variable} ${playfairFont.variable} ${dmMonoFont.variable} ${dancingScript.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${inter.variable} ${newsreader.variable} ${dmMono.variable} ${greatVibes.variable}`}
     >
       <head>
-        {/* JSON-LD Schema.org Technical SEO Injection */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-serif bg-background text-foreground">
+      <body className="min-h-screen bg-background text-foreground antialiased">
         <ThemeProvider>
-          <LanguageProvider>
-            <PreloaderProvider>{children}</PreloaderProvider>
-          </LanguageProvider>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

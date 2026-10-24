@@ -1,73 +1,128 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "motion/react";
-import NewspaperHeader from "@/components/newspaper/newspaper-header";
-import { useLanguage } from "@/context/language-context";
-import { useLocalizedContent } from "@/hooks/use-localized-content";
+import PageHeader from "@/components/site/page-header";
+import ExperienceTimeline from "@/components/site/experience-timeline";
+import Reveal from "@/components/site/reveal";
+import ContactCta from "@/components/sections/contact-cta";
+import { experience, education, skillGroups, stats } from "@/data/content";
 
 export default function ExperiencePage() {
-  const { t } = useLanguage();
-  const { appointments } = useLocalizedContent();
-
   return (
-    <div className="min-h-screen p-3 sm:p-6 md:p-8 bg-[#efe4cb] text-[#1c1917] font-serif selection:bg-[#b91c1c] selection:text-white relative overflow-x-hidden">
-      {/* Full Newspaper Header & Navbar */}
-        <NewspaperHeader />
+    <>
+      <PageHeader
+        eyebrow="Experience"
+        title="Experience & skills."
+        description="Roles, responsibilities, and the tools I reach for when building production software."
+      />
 
-        {/* Specific Experience Section Banner */}
-        <div className="text-center border-y-4 border-[#1c1917] py-6 bg-[#efe4cb] my-4 space-y-1">
-          <span className="font-mono text-xs font-bold text-[#b91c1c] uppercase tracking-widest block">
-            ★ {t("home.businessChronicleHeading")} ★
-          </span>
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight">
-            {t("nav.experience")}
-          </h1>
-          <p className="font-mono text-xs text-[#1c1917]/70 font-bold uppercase tracking-widest">
-            LEADERSHIP ROLES &bull; ENGINEERING MILESTONES &bull; PEDIGREE
-          </p>
+      <section className="border-b border-line">
+        <div className="container-page">
+          <div className="grid grid-cols-2 gap-px bg-line sm:grid-cols-4">
+            {stats.map((stat, index) => (
+              <Reveal
+                key={stat.label}
+                delay={index * 0.06}
+                y={16}
+                className="bg-background px-4 py-10 text-center sm:py-12"
+              >
+                <div className="font-serif text-3xl tracking-tight text-foreground sm:text-4xl">
+                  {stat.value}
+                </div>
+                <div className="mx-auto mt-2 max-w-[12rem] text-xs leading-relaxed text-muted">
+                  {stat.label}
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* Experience Timeline as Newspaper Press Release Articles */}
-        <div className="space-y-8 py-6 border-b-2 border-[#1c1917]">
-          {appointments.map((job, idx) => (
-            <motion.article
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="border border-[#1c1917] p-6 bg-[#e4d4b2]/30 space-y-3"
+      <section className="container-page py-16 sm:py-24">
+        <ExperienceTimeline items={experience} />
+      </section>
+
+      <section className="border-t border-line">
+        <div className="container-page py-16 sm:py-24">
+          <Reveal>
+            <p className="eyebrow">Education</p>
+            <h2 className="mt-3 font-serif text-3xl tracking-tight text-foreground sm:text-4xl">
+              Academic background.
+            </h2>
+          </Reveal>
+
+          <div className="mt-12 space-y-10">
+            {education.map((item, index) => (
+              <Reveal key={item.degree} delay={index * 0.05}>
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                  <h3 className="font-serif text-xl tracking-tight text-foreground">
+                    {item.degree}
+                  </h3>
+                  <span className="font-mono text-xs text-faint">{item.period}</span>
+                </div>
+                <p className="mt-1 text-sm font-medium text-accent">
+                  {item.institution}
+                  {item.grade && <span className="text-muted"> · Grade {item.grade}</span>}
+                </p>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
+                  {item.summary}
+                </p>
+                <ul className="mt-4 max-w-2xl space-y-2">
+                  {item.activities.map((activity) => (
+                    <li
+                      key={activity}
+                      className="flex gap-2.5 text-sm leading-relaxed text-muted"
+                    >
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                      <span>{activity}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-line">
+        <div className="container-page py-16 sm:py-24">
+          <Reveal>
+            <p className="eyebrow">Toolkit</p>
+            <h2 className="mt-3 font-serif text-3xl tracking-tight text-foreground sm:text-4xl">
+              Technologies I work with.
+            </h2>
+          </Reveal>
+
+          <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+            {skillGroups.map((group, index) => (
+              <Reveal
+                key={group.title}
+                delay={index * 0.05}
+                className="bg-surface p-6"
+              >
+                <h3 className="eyebrow">{group.title}</h3>
+                <ul className="mt-4 space-y-2.5">
+                  {group.items.map((item) => (
+                    <li key={item} className="text-sm text-muted">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="mt-12">
+            <Link
+              href="/how-i-build"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-accent"
             >
-              <div className="flex flex-wrap items-center justify-between text-xs font-mono font-bold border-b border-[#1c1917]/20 pb-2">
-                <span className="text-[#b91c1c]">[ APPOINTMENT REPORT ]</span>
-                <span>{job.period} &bull; MUMBAI, INDIA</span>
-              </div>
-
-              <h2 className="font-serif text-2xl sm:text-3xl font-black text-[#1c1917]">
-                {job.title} — {job.company}
-              </h2>
-
-              <p className="drop-cap font-serif text-xs sm:text-sm text-[#1c1917]/90 leading-relaxed pt-1">
-                {job.description}
-              </p>
-            </motion.article>
-          ))}
+              How I build these systems, end to end
+              <span>→</span>
+            </Link>
+          </Reveal>
         </div>
+      </section>
 
-        {/* Footer Navigation */}
-        <footer className="pt-6 font-mono text-xs">
-          <div className="flex items-center justify-between border-b border-[#1c1917]/30 pb-4">
-            <Link href="/editorials" className="text-[#b91c1c] font-bold hover:underline">
-              ← PREVIOUS SECTION: EDITORIALS
-            </Link>
-            <Link href="/contact" className="text-[#b91c1c] font-bold hover:underline">
-              NEXT SECTION: PRESS ROOM [CONTACT] →
-            </Link>
-          </div>
-          <div className="py-4 text-center text-[10px] text-[#1c1917]/60 uppercase tracking-widest">
-            THE ABHISHEK TIMES &bull; BUSINESS CHRONICLE SECTION
-          </div>
-        </footer>
-    </div>
+      <ContactCta />
+    </>
   );
 }
