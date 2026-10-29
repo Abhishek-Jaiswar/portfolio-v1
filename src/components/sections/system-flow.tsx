@@ -1,160 +1,147 @@
 import Reveal from "@/components/site/reveal";
+import SectionHeader from "@/components/site/section-header";
 
-const points = [
-  "Model the domain and access patterns first.",
-  "Bound every query; index the hot paths.",
-  "Move slow work off the request path.",
-  "Cache and rate-limit where it actually matters.",
+const requestPath = [
+  {
+    step: "01",
+    title: "Interface",
+    detail: "The user action and the feedback they need.",
+    tech: "React · Next.js",
+  },
+  {
+    step: "02",
+    title: "Edge",
+    detail: "Route traffic, serve static assets, protect entry points.",
+    tech: "CDN · HTTPS",
+  },
+  {
+    step: "03",
+    title: "Application",
+    detail: "Validate input, enforce access, apply domain rules.",
+    tech: "Node.js · APIs",
+  },
+  {
+    step: "04",
+    title: "Data",
+    detail: "Persist the source of truth and return a useful result.",
+    tech: "PostgreSQL · MongoDB",
+  },
 ];
 
-function Box({
-  x,
-  y,
-  w,
-  h,
-  title,
-  subtitle,
-}: {
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-  title: string;
-  subtitle: string;
-}) {
-  return (
-    <g>
-      <rect
-        x={x}
-        y={y}
-        width={w}
-        height={h}
-        rx={14}
-        className="fill-background stroke-line"
-        strokeWidth={1}
-      />
-      <text x={x + 18} y={y + 30} fontSize={15.5} fontWeight={600} className="fill-foreground">
-        {title}
-      </text>
-      <text x={x + 18} y={y + 50} fontSize={12} className="fill-muted">
-        {subtitle}
-      </text>
-    </g>
-  );
-}
+const systemConcerns = [
+  {
+    title: "Fast paths",
+    detail: "Indexes and caching for the reads that matter.",
+    mark: "↗",
+  },
+  {
+    title: "Slow work",
+    detail: "Queues and workers for tasks outside the request path.",
+    mark: "⤴",
+  },
+  {
+    title: "Production health",
+    detail: "Logs, metrics, and alerts tied to user impact.",
+    mark: "◎",
+  },
+];
 
 export default function SystemFlow() {
   return (
-    <section className="border-t border-line">
-      <div className="container-page py-20 sm:py-28">
-        <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
-          <div>
-            <p className="eyebrow">System design</p>
-            <h2 className="mt-3 max-w-xl font-serif text-3xl tracking-tight text-foreground sm:text-4xl md:text-[2.75rem]">
-              I design systems, not just features.
-            </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted">
-              Recruiters and clients don&apos;t buy a list of technologies — they
-              buy someone who can ship and solve their problem. I start from the
-              business outcome, then design the data model, the boundaries, and
-              the path a request takes through the system.
-            </p>
-            <ul className="mt-6 space-y-3 text-sm text-muted">
-              {points.map((item) => (
-                <li key={item} className="flex gap-2.5">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                  <span>{item}</span>
+    <section id="system-design" className="border-t border-line">
+      <div className="container-page py-20 sm:py-24 lg:py-28">
+        <SectionHeader
+          eyebrow="System design"
+          title="A clear path from request to result."
+          description="I start with the user and business outcome, then shape the application around the data, boundaries, and operational needs."
+        />
+
+        <Reveal className="mt-10 sm:mt-12">
+          <div className="min-w-0 overflow-hidden rounded-3xl border border-line bg-surface p-4 sm:p-6 lg:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4 sm:pb-5">
+              <p className="eyebrow">A typical request lifecycle</p>
+              <span className="inline-flex items-center gap-2 text-xs text-muted">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                Designed around the product
+              </span>
+            </div>
+
+            <ol className="mt-5 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+              {requestPath.map((item, index) => (
+                <li key={item.step} className="relative min-w-0">
+                  <div className="h-full min-w-0 rounded-2xl border border-line bg-background p-4 transition-colors duration-200 hover:border-foreground/20 hover:bg-surface-hover sm:p-5">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="font-mono text-[10px] tracking-[0.16em] text-faint">
+                        STEP {item.step}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="text-sm text-accent"
+                      >
+                        {index === requestPath.length - 1 ? "●" : "→"}
+                      </span>
+                    </div>
+                    <h3 className="mt-5 font-serif text-xl tracking-tight text-foreground sm:text-2xl">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 min-h-[3rem] text-sm leading-relaxed text-muted">
+                      {item.detail}
+                    </p>
+                    <p className="mt-5 border-t border-line pt-3 font-mono text-[10px] uppercase tracking-[0.1em] text-faint">
+                      {item.tech}
+                    </p>
+                  </div>
+                  {index < requestPath.length - 1 && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface text-xs text-muted lg:flex"
+                    >
+                      →
+                    </span>
+                  )}
                 </li>
               ))}
-            </ul>
-          </div>
+            </ol>
 
-          <Reveal delay={0.1}>
-            <div className="rounded-2xl border border-line bg-surface p-4 sm:p-6">
-              <p className="eyebrow">Where a request goes</p>
-              <div className="mt-4 overflow-x-auto">
-                <svg
-                  viewBox="0 0 1040 360"
-                  role="img"
-                  aria-label="Diagram of the path a request takes through a web application: client, edge, API, cache, background jobs, and the data layer"
-                  className="h-auto w-full min-w-[720px]"
-                >
-                  <defs>
-                    <marker
-                      id="sf-arrow"
-                      viewBox="0 0 10 10"
-                      refX="8"
-                      refY="5"
-                      markerWidth="6"
-                      markerHeight="6"
-                      orient="auto-start-reverse"
-                    >
-                      <path d="M0 0 L10 5 L0 10 Z" className="fill-faint" />
-                    </marker>
-                  </defs>
-
-                  <path
-                    d="M210 92 H280"
-                    className="flow-dash stroke-line"
-                    strokeWidth={1.5}
-                    fill="none"
-                    markerEnd="url(#sf-arrow)"
-                  />
-                  <path
-                    d="M455 92 H525"
-                    className="flow-dash stroke-line"
-                    strokeWidth={1.5}
-                    fill="none"
-                    markerEnd="url(#sf-arrow)"
-                  />
-                  <path
-                    d="M740 92 H810"
-                    className="flow-dash stroke-line"
-                    strokeWidth={1.5}
-                    fill="none"
-                    markerEnd="url(#sf-arrow)"
-                  />
-
-                  <path
-                    d="M605 124 V204"
-                    className="flow-dash stroke-line"
-                    strokeWidth={1.5}
-                    fill="none"
-                    markerEnd="url(#sf-arrow)"
-                  />
-                  <path
-                    d="M700 124 V166 H830 V204"
-                    className="flow-dash stroke-line"
-                    strokeWidth={1.5}
-                    fill="none"
-                    markerEnd="url(#sf-arrow)"
-                  />
-
-                  <text x={245} y={84} textAnchor="middle" fontSize={11} className="fill-faint">
-                    HTTPS
-                  </text>
-                  <text x={490} y={84} textAnchor="middle" fontSize={11} className="fill-faint">
-                    auth
-                  </text>
-                  <text x={775} y={84} textAnchor="middle" fontSize={11} className="fill-faint">
-                    indexes
-                  </text>
-
-                  <Box x={40} y={60} w={170} h={64} title="Client" subtitle="React · Next.js" />
-                  <Box x={285} y={60} w={170} h={64} title="Edge / CDN" subtitle="Static + caching" />
-                  <Box x={530} y={60} w={210} h={64} title="API layer" subtitle="Node.js · Express" />
-                  <Box x={815} y={60} w={185} h={64} title="Data layer" subtitle="PostgreSQL · MongoDB" />
-                  <Box x={530} y={210} w={150} h={64} title="Cache" subtitle="Hot reads" />
-                  <Box x={730} y={210} w={200} h={64} title="Background jobs" subtitle="Queue + workers" />
-                </svg>
+            <div className="mt-5 border-t border-line pt-5 sm:mt-6 sm:pt-6">
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+                <div>
+                  <p className="eyebrow">Built into the system</p>
+                  <p className="mt-1 text-sm text-muted">
+                    Production concerns shape every layer, not just the API.
+                  </p>
+                </div>
+                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-faint">
+                  Performance · Resilience · Observability
+                </span>
               </div>
-              <p className="mt-4 border-t border-line pt-4 text-xs leading-relaxed text-faint">
-                Caching, indexing, rate limiting, and observability are
-                cross-cutting — they apply at every layer, not just one.
-              </p>
+
+              <ul className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {systemConcerns.map((item) => (
+                  <li
+                    key={item.title}
+                    className="flex min-w-0 items-start gap-3 rounded-xl border border-line/70 p-4"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-sm text-accent"
+                    >
+                      {item.mark}
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-medium text-foreground">
+                        {item.title}
+                      </h3>
+                      <p className="mt-1 text-xs leading-relaxed text-muted">
+                        {item.detail}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

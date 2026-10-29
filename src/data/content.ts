@@ -15,7 +15,7 @@ export const site = {
     eyebrow: "Software Engineer",
     headline: "Business rules are messy. Software shouldn’t be.",
     intro:
-      "I build complete web applications from the ground up. I work with businesses to understand their real needs, then design and create software that is reliable, easy to use, and built to last. My focus is turning complicated requirements into clear, well-built products that actually work in the real world.",
+      "I turn complex business needs into reliable, easy-to-use web applications — from thoughtful design to production-ready software.",
     currently: {
       label: "Currently building",
       title: "Web applications at CBS Software",

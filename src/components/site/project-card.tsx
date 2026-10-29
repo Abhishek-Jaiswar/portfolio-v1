@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import type { Article } from "@/data/articles";
 
 interface ProjectCardProps {
@@ -11,13 +11,14 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ article, index = 0 }: ProjectCardProps) {
+  const reduceMotion = useReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, delay: (index % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -6 }}
+      whileHover={reduceMotion ? undefined : { y: -5 }}
       className="h-full"
     >
       <Link

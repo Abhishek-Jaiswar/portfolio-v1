@@ -6,7 +6,7 @@ export default function AboutSection() {
     <section id="about" className="border-t border-line">
       <div className="container-page py-20 sm:py-28">
         <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
-          <div>
+          <Reveal>
             <p className="eyebrow">About</p>
             <h2 className="mt-3 max-w-2xl font-serif text-3xl tracking-tight text-foreground sm:text-4xl md:text-[2.75rem]">
               Who I am and what I do.
@@ -16,7 +16,7 @@ export default function AboutSection() {
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
-          </div>
+          </Reveal>
 
           <Reveal delay={0.1}>
             <dl className="rounded-2xl border border-line bg-surface p-6 sm:p-7">

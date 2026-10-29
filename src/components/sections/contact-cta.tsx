@@ -18,13 +18,13 @@ export default function ContactCta() {
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <a
               href={`mailto:${site.email}`}
-              className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
+              className="group inline-flex min-h-12 items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-[transform,opacity] duration-200 hover:-translate-y-0.5 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
             >
-              {site.email}
+              {site.email}<span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">↗</span>
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface-hover"
+              className="group inline-flex min-h-12 items-center gap-2 rounded-full border border-line px-6 py-3 text-sm font-medium text-foreground transition-[background-color,transform] duration-200 hover:-translate-y-0.5 hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
             >
               Contact page
               <span>→</span>

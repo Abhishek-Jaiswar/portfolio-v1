@@ -61,7 +61,7 @@ export default function Hero() {
           "-=0.7"
         )
         .from(
-          ".hero-signature",
+          ".hero-portrait-note",
           {
             opacity: 0,
             clipPath: "inset(0 100% 0 0)",
@@ -69,24 +69,6 @@ export default function Hero() {
             ease: "power2.inOut",
           },
           "-=0.5"
-        )
-        .from(
-          ".hero-loop",
-          {
-            opacity: 0,
-            x: 8,
-            duration: 0.5,
-          },
-          "-=0.65"
-        )
-        .from(
-          ".hero-seo",
-          {
-            opacity: 0,
-            y: 12,
-            duration: 0.6,
-          },
-          "-=0.4"
         );
     },
     { scope: root }
@@ -100,9 +82,9 @@ export default function Hero() {
       aria-labelledby="hero-heading"
       className="relative isolate overflow-hidden bg-background"
     >
-      <div className="container-page grid items-center gap-10 lg:min-h-[min(780px,calc(100svh-4rem))] lg:grid-cols-[1.1fr_0.9fr] lg:gap-10 xl:gap-14">
+      <div className="container-page grid items-center gap-8 py-12 sm:py-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-10 lg:py-12 xl:gap-12">
         {/* LEFT: Introduction */}
-        <div className="min-w-0 lg:pr-2">
+        <div className="flex min-w-0 flex-col justify-center lg:max-w-[610px] lg:pr-5">
           <p className="hero-eyebrow eyebrow flex flex-wrap items-center gap-x-3 gap-y-1">
             <span>Software Engineer</span>
             <span
@@ -114,7 +96,7 @@ export default function Hero() {
 
           <h1
             id="hero-heading"
-            className="mt-5 max-w-[15ch] font-serif text-[2.65rem] leading-[1.06] tracking-[-0.045em] text-foreground sm:text-6xl lg:text-[3.65rem] xl:text-[4.25rem]"
+            className="mt-6 max-w-[13ch] font-serif text-[2.65rem] leading-[1.04] tracking-[-0.048em] text-foreground sm:text-6xl lg:text-[3.75rem] xl:text-[4.2rem]"
           >
             {words.map((word, index) => (
               <span
@@ -127,7 +109,7 @@ export default function Hero() {
             ))}
           </h1>
 
-          <p className="hero-intro mt-6 max-w-[36rem] text-base leading-[1.85] text-muted sm:text-[1.05rem] sm:leading-[1.8]">
+          <p className="hero-intro mt-7 max-w-[32rem] text-base leading-[1.85] text-muted sm:text-[1.05rem] sm:leading-[1.85]">
             {site.hero.intro}
           </p>
 
@@ -153,7 +135,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <p className="mt-7 inline-flex items-center gap-2 text-sm text-muted">
+          <p className="mt-6 inline-flex items-center gap-2 text-sm text-muted">
             <span
               aria-hidden="true"
               className="relative flex h-2 w-2 shrink-0"
@@ -165,82 +147,26 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* RIGHT: Portrait composition */}
-        <div className="hero-visual relative min-w-0 sm:mx-4 lg:mx-0 lg:self-stretch">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-[500px] lg:ml-auto lg:aspect-auto lg:h-full">
-            {/* Image frame */}
-            <div className="absolute inset-0 overflow-hidden">
+        {/* RIGHT: Editorial portrait */}
+        <div className="hero-visual relative min-w-0 sm:mx-4 lg:mx-0">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-[430px] pb-11 pt-7 sm:pb-12 lg:ml-auto lg:max-w-[410px] lg:aspect-[4/5]">
+            <div className="absolute inset-x-4 bottom-14 top-0 border border-line sm:inset-x-7" />
+            <div className="absolute inset-x-0 bottom-11 top-4 overflow-hidden bg-[#e9e7e2] dark:bg-[#202023] sm:inset-x-4 sm:bottom-12 sm:top-7">
               <Image
                 src={site.avatar}
                 alt={`Portrait of ${site.name}`}
                 fill
                 priority
-                className="object-cover"
+                className="object-cover object-[center_28%] grayscale contrast-[1.04]"
               />
-              <div className="hero-seo absolute inset-x-0 bottom-0 border-t border-white/15 bg-black/80 px-4 py-4 backdrop-blur-md sm:px-6 sm:py-6">
-                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/70 sm:text-[10px]">
-                  Full-stack developer · Mumbai
-                </p>
-                <p className="mt-1.5 max-w-[46ch] text-xs leading-relaxed text-white sm:mt-2 sm:text-sm">
-                  <span className="sm:hidden">
-                    I build scalable web applications with React, Next.js,
-                    Node.js, PostgreSQL, and MongoDB.
-                  </span>
-                  <span className="hidden sm:inline">
-                    I&apos;m Abhishek Jaiswar, a full-stack developer based in
-                    Mumbai. I build scalable web applications with React, Next.js,
-                    Node.js, PostgreSQL, and MongoDB — from secure APIs and data
-                    modeling to production-ready interfaces.
-                  </span>
-                </p>
-              </div>
             </div>
 
-            {/* Handwritten signature */}
             <span
               aria-hidden="true"
-              className="hero-signature pointer-events-none absolute right-4 top-5 z-10 -rotate-6 whitespace-nowrap font-script text-2xl leading-none text-foreground sm:right-6 sm:top-7 sm:text-4xl"
+              className="hero-portrait-note absolute -right-1 top-0 z-10 bg-background px-2 font-mono text-[9px] uppercase tracking-[0.18em] text-muted sm:right-2 sm:text-[10px]"
             >
-              {site.firstName}
-              <br />
-              {surname}
+              {site.firstName} Jaiswar <span className="text-faint">/ 01</span>
             </span>
-
-            {/* Build / Learn / Improve / Repeat */}
-            <div
-              aria-hidden="true"
-              className="hero-loop pointer-events-none absolute -right-3 top-[44%] z-10 hidden -translate-y-1/2 items-start gap-2 lg:flex xl:-right-10"
-            >
-              <svg
-                width="34"
-                height="44"
-                viewBox="0 0 44 44"
-                className="mt-1 rotate-[10deg] text-muted"
-              >
-                <path
-                  d="M10 36 C10 20, 28 18, 34 23"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M34 8 L30 14 L37 13"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-
-              <div className="flex flex-col font-mono text-[9px] uppercase leading-[1.8] tracking-[0.22em] text-muted">
-                <span>Build</span>
-                <span>Learn</span>
-                <span>Improve</span>
-                <span>Repeat</span>
-              </div>
-            </div>
 
           </div>
         </div>

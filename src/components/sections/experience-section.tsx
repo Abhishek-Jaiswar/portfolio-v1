@@ -2,6 +2,7 @@ import Link from "next/link";
 import { experience } from "@/data/content";
 import SectionHeader from "@/components/site/section-header";
 import ExperienceTimeline from "@/components/site/experience-timeline";
+import Reveal from "@/components/site/reveal";
 
 export default function ExperienceSection() {
   return (
@@ -22,9 +23,9 @@ export default function ExperienceSection() {
           }
         />
 
-        <div className="mt-14">
+        <Reveal className="mt-14">
           <ExperienceTimeline items={experience} showHighlights={false} />
-        </div>
+        </Reveal>
       </div>
     </section>
   );

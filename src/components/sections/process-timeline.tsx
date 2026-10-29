@@ -1,16 +1,17 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import type { ProcessPhase } from "@/data/engineering";
 
 export default function ProcessTimeline({ phases }: { phases: ProcessPhase[] }) {
+  const reduceMotion = useReducedMotion();
   return (
     <ol>
       {phases.map((phase, index) => (
         <motion.li
           key={phase.step}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.55, delay: (index % 2) * 0.05, ease: [0.22, 1, 0.36, 1] }}
           className="grid gap-4 border-b border-line py-10 last:border-0 sm:grid-cols-[auto_1fr] sm:gap-12"

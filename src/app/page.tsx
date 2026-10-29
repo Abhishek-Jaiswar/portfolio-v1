@@ -12,9 +12,9 @@ export default function Home() {
     <>
       <Hero />
       <StatsBand />
-      <AboutSection />
       <SelectedWork />
-      {/* <SystemFlow /> */}
+      <AboutSection />
+      <SystemFlow />
       <ExperienceSection />
       <WritingSection />
       <ContactCta />

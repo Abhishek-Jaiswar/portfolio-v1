@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import type { Experience } from "@/data/content";
 
 interface ExperienceTimelineProps {
@@ -12,6 +12,7 @@ export default function ExperienceTimeline({
   items,
   showHighlights = true,
 }: ExperienceTimelineProps) {
+  const reduceMotion = useReducedMotion();
   return (
     <div className="relative pl-8">
       <span className="absolute bottom-2 left-3 top-2 w-px bg-line" aria-hidden />
@@ -20,8 +21,8 @@ export default function ExperienceTimeline({
         {items.map((job, index) => (
           <motion.li
             key={`${job.company}-${job.period}`}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
